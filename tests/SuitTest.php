@@ -31,17 +31,17 @@ class SuitTest extends PHPUnit_Framework_TestCase {
 
 	public function testSharedSuit()
 	{
-		//these should be shared
-		$spade= Suit::spade();
-		$spade2= Suit::spade();
+        //these should be shared
+        $spade= Suit::spade();
+        $spade2= Suit::spade();
 
-		$this->assertSame($spade, $spade2);
+        $this->assertSame($spade, $spade2);
 
-		//these should not be shared
-		$spade= Suit::spade();
-		$spade3= Suit::spade(false);
+        //these should not be shared
+        $spade= Suit::spade();
+        $spade3= Suit::spade(false);
 
-		$this->assertNotSame($spade, $spade3);
+        $this->assertNotSame($spade, $spade3);
 	}
 
 	public function testToString()

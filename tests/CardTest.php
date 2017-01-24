@@ -5,11 +5,6 @@ use NoelDavies\Cards\Suit;
 
 class CardsTest extends PHPUnit_Framework_TestCase {
 
-	public function setUp()
-	{
-	}
-
-
 	/**
      * @expectedException InvalidArgumentException
      */
@@ -65,5 +60,57 @@ class CardsTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse($card->isFaceCard());
 
 	}
+
+	public function testPrintingACardGivesFriendlyName()
+    {
+        $card = new Card(5, Suit::diamond());
+
+        $this->assertEquals("5 of diamonds", (string)$card);
+    }
+
+    public function testNumericKeyReturnsCorrectForNumberCard()
+    {
+        $card = new Card(5, Suit::club(false));
+        $this->assertEquals(5, $card->numericKey());
+    }
+    public function testNumericKeyReturnsCorrectForAceCard()
+    {
+        $ace = 11;
+
+        $card = new Card(Card::ACE, Suit::diamond(false));
+        $this->assertEquals($ace, $card->numericKey());
+    }
+    public function testNumericKeyReturnsCorrectForFaceCard()
+    {
+        $expectedJackValue = 12;
+        $expectedQueenValue = 13;
+        $expectedKingValue = 14;
+
+        $jackCard = new Card(Card::JACK, Suit::club(false));
+        $this->assertEquals($expectedJackValue, $jackCard->numericKey());
+
+        $queenCard = new Card(Card::QUEEN, Suit::heart(false));
+        $this->assertEquals($expectedQueenValue, $queenCard->numericKey());
+
+        $kingCard = new Card(Card::KING, Suit::spade(false));
+        $this->assertEquals($expectedKingValue, $kingCard->numericKey());
+    }
+
+    public function testReadableValueNameReturnsCorrectForFaceCards(){
+        $jackCard = new Card(Card::JACK, Suit::club());
+        $this->assertEquals("Jack", $jackCard->readableValueName());
+
+        $queenCard = new Card(Card::QUEEN, Suit::club());
+        $this->assertEquals("Queen", $queenCard->readableValueName());
+
+        $kingCard = new Card(Card::KING, Suit::club());
+        $this->assertEquals("King", $kingCard->readableValueName());
+
+        $aceCard = new Card(Card::ACE, Suit::club());
+        $this->assertEquals("Ace", $aceCard->readableValueName());
+
+
+    }
+
 }
 

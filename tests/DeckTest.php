@@ -26,7 +26,7 @@ class DeckTest extends PHPUnit_Framework_TestCase {
 		$deck = new Deck;
 		$c = $deck->draw();
 
-		$this->assertInstanceOf('Fust\Cards\Card', $c);
+		$this->assertInstanceOf('NoelDavies\Cards\Card', $c);
 		$this->assertEquals(51, $deck->count());
 		$this->assertEquals(1, $deck->countDrawn());
 	}
@@ -86,7 +86,7 @@ class DeckTest extends PHPUnit_Framework_TestCase {
     {
 
 		$deck = new Deck();
-		$shuffle = m::mock('Fust\Cards\Contracts\Shuffleable')->shouldReceive('shuffle')->once()->andReturn(true)->getMock();
+		$shuffle = m::mock('NoelDavies\Cards\Contracts\Shuffleable')->shouldReceive('shuffle')->once()->andReturn(true)->getMock();
 		$deck->setShuffler($shuffle);
 
 		$v = $deck->shuffle();
